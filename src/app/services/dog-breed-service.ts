@@ -7,6 +7,12 @@ const DOG_BREED_BASE_URL = 'http://localhost:3000/breeds';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * Dog Breed Service
+ *
+ * Upon initialization, this service can be used to retrieve a particular number of breeds based on the cursor (page number)
+ */
 export class DogBreedService {
   constructor(private http: HttpClient) {}
 

@@ -4,8 +4,12 @@
     </div>
     <hr />
     <img class="dog-breed-detail-image loading-background" [ngSrc]="breedDetails.imageUrl" width="300" height="300" />
-    <p>Breed name: {{ setTitleCase(breedDetails.name) }}</p>
-    <p>Sub-breed name: {{ setTitleCase(breedDetails.subBreedName) || 'N/A' }}</p>
+    <div class="dog-breed-detail-info-chips">
+        <mat-chip-option selected selectable="false">Breed: {{ setTitleCase(breedDetails.name) }}</mat-chip-option>
+        <mat-chip-option [selected]="!!breedDetails.subBreedName" [disabled]="!breedDetails.subBreedName" selectable="false">
+            Sub-breed: {{ setTitleCase(breedDetails.subBreedName) || 'N/A' }}
+        </mat-chip-option>
+    </div>
     <hr />
     @if (breedDetails.relatedSubBreeds.length > 0) {
         <div class="dog-breed-detail-related-subbreeds">

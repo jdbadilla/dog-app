@@ -44,3 +44,10 @@ hr {
   border: 0.01rem solid darkgray;
   width: 100%;
 }
+
+.dog-breed-detail-info-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}

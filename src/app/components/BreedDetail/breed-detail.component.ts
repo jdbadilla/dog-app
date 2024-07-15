@@ -5,13 +5,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { titleCase } from '../../helpers/titleCase';
 import { DogBreedService } from '../../services/dog-breed-service';
 import { DogBreedDetails } from '../../types/dog-breeds.types';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'breed-detail',
   standalone: true,
   templateUrl: 'breed-detail.component.html',
   styleUrl: 'breed-detail.component.css',
-  imports: [NgOptimizedImage, RouterLink, MatButtonModule],
+  imports: [NgOptimizedImage, RouterLink, MatButtonModule, MatChipsModule],
 })
 export class BreedDetail {
   constructor(private router: Router, private route: ActivatedRoute) {}
