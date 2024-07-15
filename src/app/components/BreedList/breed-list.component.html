@@ -1,30 +1,102 @@
 <div id="dog-breed-table-container">
-    <h3>Dog Breeds</h3>
-    <table mat-table class="mat-elevation-z8">
-        <tbody>
-            @for (breed of breeds; track breed.id) {
+    <div class="dog-breed-table-title">
+        <h3>Dog Breeds</h3>
+        <mat-icon class="dog-breed-table-title-icon">pets</mat-icon>
+    </div>
+    <hr style="margin:0" />
+    <mat-button-toggle-group style="margin-top:30px;">
+        <mat-button-toggle
+            (click)="toggleAggregatedView(true)"
+            [checked]="isAggregatedView"
+        >
+            Aggregated View
+        </mat-button-toggle>
+        <mat-button-toggle
+            (click)="toggleAggregatedView(false)"
+            [checked]="!isAggregatedView"
+        >
+            Sub-breed View
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+    @if (isAggregatedView) {
+        <table class="mat-elevation-z8">
+            <thead>
+                <tr><th>Breed Name</th></tr>
+            </thead>
+            <tbody>
+                @for (breed of breeds; track breed.id) {
+                    <tr>
+                        <td>
+                            <a
+                                [routerLink]="['/breeds', breed.id]"
+                                (click)="onBreedClick(breed)"
+                            >
+                                {{ setTitleCase(breed.subBreedName || '') }} {{ setTitleCase(breed.name) }}
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <table class="mat-elevation-z8">
+            <thead>
                 <tr>
-                    <td>
-                        <a
-                            [routerLink]="['/breeds', breed.id]"
-                            (click)="onBreedClick(breed)"
-                        >
-                            {{ setTitleCase(breed.subBreedName || '') }} {{ setTitleCase(breed.name) }}
-                        </a>
-                    </td>
+                    <th>Breed Name</th>
+                    <th>Sub-Breed Name <i>(if applicable)</i></th>
                 </tr>
+            </thead>
+            <tbody>
+                @for (breed of breeds; track breed.id) {
+                    <tr>
+                        @if (!breed.subBreedName) {
+                            <td>
+                                <a
+                                    [routerLink]="['/breeds', breed.id]"
+                                    (click)="onBreedClick(breed)"
+                                >
+                                    {{ setTitleCase(breed.name) }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ setTitleCase(breed.subBreedName || '') }}
+                            </td>
+                        } @else {
+                            <td>
+                                {{ setTitleCase(breed.name) }}
+                            </td>
+                            <td>
+                                <a
+                                    [routerLink]="['/breeds', breed.id]"
+                                    (click)="onBreedClick(breed)"
+                                >
+                                    {{ setTitleCase(breed.subBreedName || '') }}
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <hr style="margin:0" />
+    <div class="dog-breed-table-footer">
+        <div class="dog-breed-table-pagination">
+            @for (pageNumber of numberOfPagesArray; track pageNumber) {
+                <button
+                    mat-mini-fab
+                    [ngClass]="currentPage === pageNumber ? 'breed-list-selected-page' : ''"
+                    (click)="onPageNumberClick(pageNumber)"
+                >
+                    {{ pageNumber }}
+                </button>
             }
-        </tbody>
-    </table>
-    <div class="dog-breed-table-pagination">
-        @for (pageNumber of numberOfPagesArray; track pageNumber) {
-            <button
-                mat-mini-fab
-                [ngClass]="currentPage === pageNumber ? 'breed-list-selected-page' : ''"
-                (click)="onPageNumberClick(pageNumber)"
-            >
-                {{ pageNumber }}
-            </button>
-        }
+        </div>
+        <button [disabled]="currentPage === 1 ? true : false" (click)="onPreviousPageClick()" mat-icon-button>
+            <mat-icon>arrow_backward</mat-icon>
+        </button>
+        <button [disabled]="currentPage === numberOfPages ? true : false" (click)="onNextPageClick()" mat-icon-button>
+            <mat-icon>arrow_forward</mat-icon>
+        </button>
     </div>
 </div>

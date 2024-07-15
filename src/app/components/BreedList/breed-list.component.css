@@ -1,10 +1,11 @@
 #dog-breed-table-container {
-  margin-top: 50px;
   height: auto;
   text-align: center;
 }
 
 table {
+  margin-top: 38px !important;
+  margin-bottom: 38px !important;
   width: 400px;
   margin: auto;
 }
@@ -15,7 +16,6 @@ td {
   border: 1px solid black;
   text-align: center;
   border-collapse: collapse;
-  margin-bottom: 38px;
 }
 
 th {
@@ -32,8 +32,29 @@ td:hover {
   flex-direction: row;
   justify-content: center;
   gap: 5px;
+  padding-top: 30px;
+  margin-bottom: 20px;
 }
 
 .breed-list-selected-page {
-  background-color: #a9a9a9;
+  background-color: blue;
+  color: white;
+}
+
+.dog-breed-table-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 100px;
+  background-color: #89cff0;
+}
+
+.dog-breed-table-footer {
+  padding-bottom: 50px;
+}
+
+.dog-breed-table-title > h3 {
+  margin: 0;
 }

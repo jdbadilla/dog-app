@@ -5,6 +5,9 @@ import { titleCase } from '../../helpers/titleCase';
 import { GoogleAnalyticsService } from '../../services/google-analytics-service';
 import { DogBreedService } from '../../services/dog-breed-service';
 import { DogBreed } from '../../types/dog-breeds.types';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const INIT_PAGE_NUMBER = 1;
 
@@ -13,7 +16,13 @@ const INIT_PAGE_NUMBER = 1;
   standalone: true,
   templateUrl: 'breed-list.component.html',
   styleUrl: 'breed-list.component.css',
-  imports: [RouterLink, CommonModule],
+  imports: [
+    RouterLink,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatButtonToggleModule,
+  ],
 })
 export class BreedList {
   constructor(private router: Router) {}
@@ -23,15 +32,32 @@ export class BreedList {
   numberOfPages: number = 0;
   numberOfPagesArray: number[] = [];
   currentPage: number = INIT_PAGE_NUMBER;
+  isAggregatedView: boolean = true;
 
   onBreedClick = (breed: DogBreed) => {
     this.analyticsService.trackSelectBreedEvent(breed);
   };
   onPageNumberClick = (pageNumber: number) => {
     this.currentPage = pageNumber;
-    this.dogBreedService.getDogBreeds({ pageNumber }).then((dogBreedData) => {
-      this.breeds = dogBreedData.dogBreeds;
-    });
+    this.fetchDogBreeds();
+  };
+  onNextPageClick = () => {
+    this.currentPage = this.currentPage + 1;
+    this.fetchDogBreeds();
+  };
+  onPreviousPageClick = () => {
+    this.currentPage = this.currentPage - 1;
+    this.fetchDogBreeds();
+  };
+  fetchDogBreeds = () => {
+    this.dogBreedService
+      .getDogBreeds({ pageNumber: this.currentPage })
+      .then((dogBreedData) => {
+        this.breeds = dogBreedData.dogBreeds;
+      });
+  };
+  toggleAggregatedView = (isAggregated: boolean) => {
+    this.isAggregatedView = isAggregated;
   };
   setTitleCase = (str: string) => {
     return titleCase(str);

@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { titleCase } from '../../helpers/titleCase';
 import { DogBreedService } from '../../services/dog-breed-service';
@@ -10,7 +11,7 @@ import { DogBreedDetails } from '../../types/dog-breeds.types';
   standalone: true,
   templateUrl: 'breed-detail.component.html',
   styleUrl: 'breed-detail.component.css',
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, MatButtonModule],
 })
 export class BreedDetail {
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -26,7 +27,11 @@ export class BreedDetail {
     this.router.navigate(['/breeds']);
   };
 
-  setTitleCase = (str: string) => {
+  setTitleCase = (str?: string) => {
+    if (!str) {
+      return '';
+    }
+
     return titleCase(str);
   };
 

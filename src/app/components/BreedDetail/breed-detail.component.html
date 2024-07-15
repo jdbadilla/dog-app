@@ -1,16 +1,15 @@
 <div id="dog-breed-detail-container">
-    <h3>{{ setTitleCase(breedDetails.subBreedName || '') }} {{ setTitleCase(breedDetails.name) }}</h3>
-    <img [ngSrc]="breedDetails.imageUrl" width="300" height="300" />
-    <button
-        mat-stroked-button
-        id="dog-breed-detail-button"
-        (click)="onBackClick()"
-    >
-        Back
-    </button>
+    <div id="dog-breed-detail-title">
+        <h3>{{ setTitleCase(breedDetails.subBreedName) }} {{ setTitleCase(breedDetails.name) }}</h3>
+    </div>
+    <hr />
+    <img class="dog-breed-detail-image loading-background" [ngSrc]="breedDetails.imageUrl" width="300" height="300" />
+    <p>Breed name: {{ setTitleCase(breedDetails.name) }}</p>
+    <p>Sub-breed name: {{ setTitleCase(breedDetails.subBreedName) || 'N/A' }}</p>
+    <hr />
     @if (breedDetails.relatedSubBreeds.length > 0) {
-        <div id="similar-dog-breeds">
-            <p>Other dogs like this..</p>
+        <div class="dog-breed-detail-related-subbreeds">
+            <p>Like this dog? Here are other dogs like this..</p>
             <ul>
             @for (relatedSubBreed of breedDetails.relatedSubBreeds; track relatedSubBreed.id) {
                 <li>
@@ -22,4 +21,11 @@
             </ul>
         </div>
     }
+    <button
+        mat-stroked-button
+        id="dog-breed-detail-back-button"
+        (click)="onBackClick()"
+    >
+        Back
+    </button>
 </div>

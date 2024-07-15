@@ -1,13 +1,46 @@
 #dog-breed-detail-container {
   width: auto;
   margin: auto;
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#dog-breed-detail-button {
+#dog-breed-detail-back-button {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.dog-breed-detail-image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#dog-breed-detail-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  background-color: #89cff0;
+}
+
+#dog-breed-detail-title > h3 {
+  margin: 0;
+}
+
+.loading-background {
+  background: transparent
+    url("http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif")
+    center no-repeat;
+}
+
+.dog-breed-detail-related-subbreeds {
+  padding-top: 20px;
+}
+
+hr {
+  margin: 0;
+  border: 0.01rem solid darkgray;
+  width: 100%;
 }
