@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
 import { BreedList } from './BreedList/breed-list.component';
 
 @Component({
@@ -9,10 +14,15 @@ import { BreedList } from './BreedList/breed-list.component';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
   title = 'dog-app';
 
   ngOnInit() {
-    this.router.navigate(['/breeds']);
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        // scroll to the top whenever the user navigates to a new page
+        window.scroll(0, 0);
+      }
+    });
   }
 }

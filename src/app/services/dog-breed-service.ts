@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { DogBreed, DogBreedDetails } from '../types/dog-breeds.types';
 
 const DOG_BREED_BASE_URL = 'http://localhost:3000/breeds';
+const MAX_NUMBER_OF_IMAGES_PER_BREED = 6;
 
 @Injectable({
   providedIn: 'root',
@@ -34,12 +35,18 @@ export class DogBreedService {
     });
   };
 
-  public getDogBreedDetailsById = async (
-    breedId: string
-  ): Promise<DogBreedDetails> => {
+  public getDogBreedDetailsById = async ({
+    breedId,
+    numberOfImages = MAX_NUMBER_OF_IMAGES_PER_BREED,
+  }: {
+    breedId: string;
+    numberOfImages?: number;
+  }): Promise<DogBreedDetails> => {
     return new Promise((resolve, reject) => {
       this.http
-        .get<DogBreedDetails>(`${DOG_BREED_BASE_URL}/detail/${breedId}`)
+        .get<DogBreedDetails>(
+          `${DOG_BREED_BASE_URL}/detail/${breedId}?numberOfImages=${numberOfImages}`
+        )
         .subscribe((breedDetails) => {
           resolve(breedDetails);
         });

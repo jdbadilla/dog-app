@@ -3,7 +3,11 @@
         <h3>{{ setTitleCase(breedDetails.subBreedName) }} {{ setTitleCase(breedDetails.name) }}</h3>
     </div>
     <hr />
-    <img class="dog-breed-detail-image loading-background" [ngSrc]="breedDetails.imageUrl" width="300" height="300" />
+    <div class="dog-breed-detail-image-container">
+            @for (imageUrl of breedDetails.imageUrls; track imageUrl) {
+                <img class="dog-breed-detail-image loading-background" [ngSrc]="imageUrl" width="340" height="320" />
+            }
+    </div>
     <div class="dog-breed-detail-info-chips">
         <mat-chip-option selected selectable="false">Breed: {{ setTitleCase(breedDetails.name) }}</mat-chip-option>
         <mat-chip-option [selected]="!!breedDetails.subBreedName" [disabled]="!breedDetails.subBreedName" selectable="false">
@@ -13,7 +17,7 @@
     <hr />
     @if (breedDetails.relatedSubBreeds.length > 0) {
         <div class="dog-breed-detail-related-subbreeds">
-            <p>Like this dog? Here are other dogs like this..</p>
+            <p>Like this dog? Here are other dogs like this...</p>
             <ul>
             @for (relatedSubBreed of breedDetails.relatedSubBreeds; track relatedSubBreed.id) {
                 <li>
