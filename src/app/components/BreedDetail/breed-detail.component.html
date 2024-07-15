@@ -1,0 +1,25 @@
+<div id="dog-breed-detail-container">
+    <h3>{{ setTitleCase(breedDetails.subBreedName || '') }} {{ setTitleCase(breedDetails.name) }}</h3>
+    <img [ngSrc]="breedDetails.imageUrl" width="300" height="300" />
+    <button
+        mat-stroked-button
+        id="dog-breed-detail-button"
+        (click)="onBackClick()"
+    >
+        Back
+    </button>
+    @if (breedDetails.relatedSubBreeds.length > 0) {
+        <div id="similar-dog-breeds">
+            <p>Other dogs like this..</p>
+            <ul>
+            @for (relatedSubBreed of breedDetails.relatedSubBreeds; track relatedSubBreed.id) {
+                <li>
+                    <a [routerLink]="['/breeds', relatedSubBreed.id]">
+                        {{ setTitleCase(relatedSubBreed.subBreedName) }} {{ setTitleCase(breedDetails.name) }}
+                    </a>
+                </li>
+            }
+            </ul>
+        </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+#dog-breed-detail-container {
+  width: auto;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#dog-breed-detail-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

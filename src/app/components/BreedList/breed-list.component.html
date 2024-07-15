@@ -1,0 +1,30 @@
+<div id="dog-breed-table-container">
+    <h3>Dog Breeds</h3>
+    <table mat-table class="mat-elevation-z8">
+        <tbody>
+            @for (breed of breeds; track breed.id) {
+                <tr>
+                    <td>
+                        <a
+                            [routerLink]="['/breeds', breed.id]"
+                            (click)="onBreedClick(breed)"
+                        >
+                            {{ setTitleCase(breed.subBreedName || '') }} {{ setTitleCase(breed.name) }}
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="dog-breed-table-pagination">
+        @for (pageNumber of numberOfPagesArray; track pageNumber) {
+            <button
+                mat-mini-fab
+                [ngClass]="currentPage === pageNumber ? 'breed-list-selected-page' : ''"
+                (click)="onPageNumberClick(pageNumber)"
+            >
+                {{ pageNumber }}
+            </button>
+        }
+    </div>
+</div>
