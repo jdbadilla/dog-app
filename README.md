@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This application works in conjunction with the [Dog App Node BFF](<(https://github.com/jdbadilla/dog-app-bff)>). Please make sure you are running that before initializing the development server.
 
+This project also uses [Yarn package manager](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable). Please ensure you have installed it (using `npm install --global yarn`), and run `yarn` in the project to install all dependencies.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
