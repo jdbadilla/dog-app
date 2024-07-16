@@ -37,6 +37,7 @@
 
 .dog-breed-detail-related-subbreeds {
   padding-top: 20px;
+  text-align: center;
 }
 
 hr {
@@ -57,4 +58,22 @@ hr {
   flex-direction: row;
   gap: 40px;
   align-items: center;
+}
+
+img {
+  border-radius: 10px;
+}
+
+.dog-breed-detail-related-subbreed-entries {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+
+.dog-breed-detail-related-subbreed-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

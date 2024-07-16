@@ -1,0 +1,61 @@
+@if (isAggregatedView) {
+    <table class="mat-elevation-z8">
+        <thead>
+            <tr><th>Full Breed Name</th></tr>
+        </thead>
+        <tbody>
+            @for (breed of breeds; track breed.id) {
+                <tr>
+                    <td>
+                        <a
+                            [routerLink]="['/breeds', breed.id]"
+                            (click)="onBreedClick(breed)"
+                        >
+                            {{ setTitleCase(breed.subBreedName || '') }} {{ setTitleCase(breed.name) }}
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} @else {
+    <table class="mat-elevation-z8">
+        <thead>
+            <tr>
+                <th>Breed Name</th>
+                <th>Sub-Breed Name <i>(if applicable)</i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (breed of breeds; track breed.id) {
+                <tr>
+                    @if (!breed.subBreedName) {
+                        <td>
+                            <a
+                                [routerLink]="['/breeds', breed.id]"
+                                (click)="onBreedClick(breed)"
+                            >
+                                {{ setTitleCase(breed.name) }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ setTitleCase(breed.subBreedName || '') }}
+                        </td>
+                    } @else {
+                        <td>
+                            {{ setTitleCase(breed.name) }}
+                        </td>
+                        <td>
+                            <a
+                                [routerLink]="['/breeds', breed.id]"
+                                (click)="onBreedClick(breed)"
+                            >
+                                {{ setTitleCase(breed.subBreedName || '') }}
+                            </a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -3,30 +3,6 @@
   text-align: center;
 }
 
-table {
-  margin-top: 38px !important;
-  margin-bottom: 38px !important;
-  width: 400px;
-  margin: auto;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-  text-align: center;
-  border-collapse: collapse;
-}
-
-th {
-  position: sticky;
-}
-
-td:hover {
-  color: blue;
-  cursor: pointer;
-}
-
 .dog-breed-table-pagination {
   display: flex;
   flex-direction: row;

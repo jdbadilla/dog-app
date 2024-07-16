@@ -12,4 +12,5 @@ export interface DogBreedDetails extends DogBreed {
 interface RelatedSubBreed {
   id: string;
   subBreedName: string;
+  imageUrl: string;
 }

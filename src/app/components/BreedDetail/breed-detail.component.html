@@ -18,15 +18,16 @@
     @if (breedDetails.relatedSubBreeds.length > 0) {
         <div class="dog-breed-detail-related-subbreeds">
             <p>Like this dog? Here are other dogs like this...</p>
-            <ul>
+            <div class="dog-breed-detail-related-subbreed-entries">
             @for (relatedSubBreed of breedDetails.relatedSubBreeds; track relatedSubBreed.id) {
-                <li>
-                    <a [routerLink]="['/breeds', relatedSubBreed.id]">
+                <a [routerLink]="['/breeds', relatedSubBreed.id]">
+                    <div class="dog-breed-detail-related-subbreed-entry">
+                        <img [ngSrc]="relatedSubBreed.imageUrl" width="170" height="160" />
                         {{ setTitleCase(relatedSubBreed.subBreedName) }} {{ setTitleCase(breedDetails.name) }}
-                    </a>
-                </li>
+                    </div>
+                </a>
             }
-            </ul>
+            </div>
         </div>
     }
     <button
