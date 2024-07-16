@@ -24,6 +24,10 @@ It is used to collect three different user interactions, namely:
 - User clicks on a specific dog breed
 - User loads a specific dog breed's details
 
+## Styling
+
+This application was styled with Angular Material. For more information about its usage, read [here](https://material.angular.io/).
+
 ## Further help
 
 For further help, do not hesitate to reach out to José Badilla, creator of the project, at jdbadilla@gmail.com.
