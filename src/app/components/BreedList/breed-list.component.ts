@@ -9,8 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-const INIT_PAGE_NUMBER = 1;
+const DEFAULT_PAGE_NUMBER = 1;
 
+/**
+ * Breed List Component - Retrieves the paginated breed list using the Dog Breed Service and displays it
+ */
 @Component({
   selector: 'breed-list',
   standalone: true,
@@ -31,9 +34,17 @@ export class BreedList {
   breeds: DogBreed[] = [];
   numberOfPages: number = 0;
   numberOfPagesArray: number[] = [];
-  currentPage: number = INIT_PAGE_NUMBER;
+  currentPage: number = DEFAULT_PAGE_NUMBER;
   isAggregatedView: boolean = true;
+  hasError: boolean = false;
 
+  fetchDogBreeds = () => {
+    this.dogBreedService
+      .getDogBreeds({ pageNumber: this.currentPage })
+      .then((dogBreedData) => {
+        this.breeds = dogBreedData.dogBreeds;
+      });
+  };
   onBreedClick = (breed: DogBreed) => {
     this.analyticsService.trackSelectBreedEvent(breed);
   };
@@ -49,13 +60,6 @@ export class BreedList {
     this.currentPage = this.currentPage - 1;
     this.fetchDogBreeds();
   };
-  fetchDogBreeds = () => {
-    this.dogBreedService
-      .getDogBreeds({ pageNumber: this.currentPage })
-      .then((dogBreedData) => {
-        this.breeds = dogBreedData.dogBreeds;
-      });
-  };
   toggleAggregatedView = (isAggregated: boolean) => {
     this.isAggregatedView = isAggregated;
   };
@@ -65,14 +69,14 @@ export class BreedList {
 
   ngOnInit() {
     this.dogBreedService
-      .getDogBreeds({ pageNumber: INIT_PAGE_NUMBER })
+      .getDogBreeds({ pageNumber: DEFAULT_PAGE_NUMBER })
       .then((dogBreedData) => {
         this.breeds = dogBreedData.dogBreeds;
         this.numberOfPages = dogBreedData.numberOfPages;
         this.numberOfPagesArray = new Array(this.numberOfPages)
           .fill(0)
           .map((val, idx) => idx + 1);
-        this.currentPage = INIT_PAGE_NUMBER;
+        this.currentPage = DEFAULT_PAGE_NUMBER;
 
         this.analyticsService.trackLoadBreedsListEvent(this.breeds);
       });

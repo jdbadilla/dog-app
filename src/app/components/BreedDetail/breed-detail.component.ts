@@ -8,6 +8,11 @@ import { DogBreedDetails } from '../../types/dog-breeds.types';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
+const DEFAULT_NUMBER_OF_IMAGES_SHOWN = 3;
+
+/**
+ * Breed Detail Component - Retrieves breed-specific details using the Dog Breed Service
+ */
 @Component({
   selector: 'breed-detail',
   standalone: true,
@@ -30,7 +35,6 @@ export class BreedDetail {
     id: '',
     relatedSubBreeds: [],
   };
-  maxNumberOfImagesShown: number = 3;
 
   onBackClick = () => {
     this.router.navigate(['/breeds']);
@@ -49,7 +53,7 @@ export class BreedDetail {
       this.dogBreedService
         .getDogBreedDetailsById({
           breedId: params['id'],
-          numberOfImages: this.maxNumberOfImagesShown,
+          numberOfImages: DEFAULT_NUMBER_OF_IMAGES_SHOWN,
         })
         .then((dogBreedDetails) => {
           this.breedDetails = dogBreedDetails;
