@@ -18,7 +18,7 @@ If you click on one of the dog names, you will be redirected to a page containin
 
 ## Analytics
 
-This application uses Google Analytics to track events via the `window.dataLayer` object. The script for GA is initialized in the [index.html](https://github.com/jdbadilla/dog-app/blob/main/src/index.html#L4-L12) of the application.
+This application uses [Google Analytics](https://developers.google.com/tag-platform/tag-manager/datalayer) to track events via the `window.dataLayer` object. The script for GA is initialized in the [index.html](https://github.com/jdbadilla/dog-app/blob/main/src/index.html#L4-L12) of the application.
 
 It is used to collect three different user interactions, namely:
 
