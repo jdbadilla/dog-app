@@ -42,6 +42,11 @@ export class BreedList {
       .getDogBreeds({ pageNumber: this.currentPage })
       .then((dogBreedData) => {
         this.breeds = dogBreedData.dogBreeds;
+        this.numberOfPages = dogBreedData.numberOfPages;
+        this.numberOfPagesArray = new Array(dogBreedData.numberOfPages)
+          .fill(0)
+          .map((val, idx) => idx + 1);
+        this.analyticsService.trackLoadBreedsListEvent(this.breeds);
       });
   };
   onPageNumberClick = (pageNumber: number) => {
@@ -61,17 +66,7 @@ export class BreedList {
   };
 
   ngOnInit() {
-    this.dogBreedService
-      .getDogBreeds({ pageNumber: DEFAULT_PAGE_NUMBER })
-      .then((dogBreedData) => {
-        this.breeds = dogBreedData.dogBreeds;
-        this.numberOfPages = dogBreedData.numberOfPages;
-        this.numberOfPagesArray = new Array(this.numberOfPages)
-          .fill(0)
-          .map((val, idx) => idx + 1);
-        this.currentPage = DEFAULT_PAGE_NUMBER;
-
-        this.analyticsService.trackLoadBreedsListEvent(this.breeds);
-      });
+    this.currentPage = DEFAULT_PAGE_NUMBER;
+    this.fetchDogBreeds();
   }
 }

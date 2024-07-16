@@ -7,6 +7,7 @@ import { DogBreedService } from '../../services/dog-breed-service';
 import { DogBreedDetails } from '../../types/dog-breeds.types';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { GoogleAnalyticsService } from '../../services/google-analytics-service';
 
 const DEFAULT_NUMBER_OF_IMAGES_SHOWN = 3;
 
@@ -29,6 +30,7 @@ const DEFAULT_NUMBER_OF_IMAGES_SHOWN = 3;
 export class BreedDetail {
   constructor(private router: Router, private route: ActivatedRoute) {}
   dogBreedService = inject(DogBreedService);
+  analyticsService = inject(GoogleAnalyticsService);
   breedDetails: DogBreedDetails = {
     name: '',
     imageUrls: [],
@@ -57,6 +59,7 @@ export class BreedDetail {
         })
         .then((dogBreedDetails) => {
           this.breedDetails = dogBreedDetails;
+          this.analyticsService.loadBreedDetailEvent(dogBreedDetails);
         });
     });
   };
